@@ -3,7 +3,14 @@
 #include <gdk/gdk.h>
 
 static void on_button_clicked(GtkWidget *button, gpointer user_data) {
-    g_print("ボタンがクリックされたよ\n");
+    GtkWidget* messageDialog = gtk_message_dialog_new(
+                                      NULL,
+                                      GTK_DIALOG_DESTROY_WITH_PARENT,
+                                      GTK_MESSAGE_INFO,
+                                      GTK_BUTTONS_OK,
+                                      "ボタンが押されたよ");
+    gtk_dialog_run(GTK_DIALOG(messageDialog));
+    gtk_widget_destroy(messageDialog);
 }
 
 int main(int argc, char **argv) {
