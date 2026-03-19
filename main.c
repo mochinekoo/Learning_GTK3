@@ -1,6 +1,10 @@
-#include <iostream>
+#include <stdio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
+
+static void on_button_clicked(GtkWidget *button, gpointer user_data) {
+    g_print("ボタンがクリックされたよ\n");
+}
 
 int main(int argc, char **argv) {
     gtk_init(&argc, &argv);
@@ -8,6 +12,11 @@ int main(int argc, char **argv) {
     gtk_window_set_title(GTK_WINDOW(window), "Hello, GTK!");
     gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+    GtkWidget *button = gtk_button_new_with_label("Click Me");
+    g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), NULL);
+    gtk_container_add(GTK_CONTAINER(window), button);
+
     gtk_widget_show_all(window);
     gtk_main();
     return 0;
